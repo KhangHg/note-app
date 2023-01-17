@@ -6,6 +6,7 @@ import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHt
 import bodyParser from 'body-parser';
 import { expressMiddleware } from '@apollo/server/express4';
 import fakeData from './fakeData/index.js'
+import { argv } from 'process';
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -31,8 +32,14 @@ const resolvers = {
     Query: {
         folders: () => {
             return fakeData.folders
-        }
-    }
+        },
+    },
+    Folder: {
+        author: (parent, arg) => {
+            const authorId = parent.authorId;
+            return fakeData.authors.find(author => author.id === authorId);
+        },
+    },
 };
 
 const server = new ApolloServer({
