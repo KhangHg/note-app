@@ -1,7 +1,9 @@
 import { createBrowserRouter, Outlet } from "react-router-dom";
 import Home from "../pages/home"
 import Login from "../pages/login"
+import ErrorPage from "../pages/errorPage"
 import AuthProvider from "../context/AuthProvider"
+import ProtectedRoute from "./ProtectedRoute";
 
 const AuthLayout = () => {
     return (
@@ -14,15 +16,21 @@ const AuthLayout = () => {
 export default createBrowserRouter([
     {
         element: <AuthLayout />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 element: <Login />,
                 path: '/login'
             },
             {
-                element: <Home />,
-                path: '/'
-            }
+                element: <ProtectedRoute />,
+                children: [
+                    {
+                        element: <Home />,
+                        path: '/'
+                    }
+                ]
+            },
         ]
     }
 ])
