@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
+import '../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { RouterProvider } from 'react-router-dom'
 import router from './router'
 import '@fontsource/roboto/300.css'

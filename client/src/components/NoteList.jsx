@@ -19,7 +19,8 @@ import {
     useNavigate,
 } from 'react-router-dom';
 export default function NoteList() {
-
+    const { noteId, folderId } = useParams();
+    const [activeNoteId, setActiveNoteId] = useState(noteId);
     const folder = { notes: [{ id: '1', content: 'this is new note' }] };
     return (
         <Grid container height='100%'>
@@ -60,13 +61,13 @@ export default function NoteList() {
                                 key={id}
                                 to={`note/${id}`}
                                 style={{ textDecoration: 'none' }}
-                            // onClick={() => setActiveNoteId(id)}
+                                onClick={() => setActiveNoteId(id)}
                             >
                                 <Card
                                     sx={{
                                         mb: '5px',
-                                        // backgroundColor:
-                                        //     id === activeNoteId ? 'rgb(255 211 140)' : null,
+                                        backgroundColor:
+                                            id === activeNoteId ? 'rgb(255 211 140)' : null,
                                     }}
                                 >
                                     <CardContent
